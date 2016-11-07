@@ -1,0 +1,18 @@
+  
+
+	// $('#question_type').on('focus',function(){
+		 option = '<%= @question.question_type %>'
+     
+		if(option == "single"){
+
+			$('#question-form').html("<%= j render(:partial => 'single') %>");
+		}
+		if(option == "multiple"){
+			
+			$('#question-form').html("<%= j render(:partial => 'multiple') %>");
+		}
+		if(option == "yes/no"){
+			
+			$('#question-form').html("<%= j render(:partial => 'yesno') %>");
+		}
+	

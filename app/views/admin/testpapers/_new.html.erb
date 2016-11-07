@@ -1,0 +1,34 @@
+<br><h3> Select the test detail</h3>
+<%= form_for :test, url: admin_course_testpapers_path, :remote => true  do |f| %>
+ <% if @test.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@test.errors.count, "error") %> prohibited
+        this test from being saved:
+      </h2>
+     
+        <% @test.errors.full_messages.each do |msg| %>
+         <h4><%= msg %></h4>
+        <% end %>
+     
+    </div>
+  <% end %>
+  <p>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </p>
+ 
+  <p>
+    <%= f.label :number_of_questions %><br>
+    <%= f.text_field :number_of_questions %>
+  </p>
+
+  <p>
+    <%= f.label :time_for_test%><br>
+   <%= select(:test, :time_for_test, [['30 minutes', 1800], ['1 hour', 3600], ['2 hour', 7200]]) %>
+  </p>
+ 
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>

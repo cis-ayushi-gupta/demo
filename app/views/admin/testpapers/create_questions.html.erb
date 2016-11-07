@@ -1,0 +1,191 @@
+
+<p> <%= @test.question_details.count %> question saved</p>
+ <%= form_for :question  do |f| %>
+  <% if @question_detail.errors.any? %>
+    <div id="error_explanation">
+    <h2>
+      <%= pluralize(@question_detail.errors.count, "error") %> prohibited this question from being saved:
+    </h2>
+    <% @question_detail.errors.full_messages.each do |msg| %>
+    <h4>
+      <%= msg %>
+    </h4>
+    <% end %>
+    </div>
+  <% end %>
+ <p>
+    <%= f.label :Question_type%><br>
+   <%= f.select :Question_type,  ['Multiple Choice' , 'Single Choice' , 'yes/no'],
+    selected: "" %>
+  </p>
+  <% end %>
+
+  <div class="multiple-choice hidden">
+ <%= form_for :question, url: admin_question_path do |f| %>
+
+  <p>
+ <%= f.label :question_number %><br>
+<%= f.text_field :question_number,  :readonly => true, :value => @test.question_details.count + 1 %>
+</p>
+
+
+  <p>
+ <%= f.label :question_type %><br>
+<%= f.text_field :question_type,  :readonly => true, :value => "multiple"%>
+</p>
+
+  <p>
+    <%= f.label :question %><br>
+    <%= f.text_area :question, size: "50x5" %>
+  </p>
+
+  <p>
+    <%= f.label :option_1 %><br>
+    <%= f.text_field :option_1 %>
+  </p>
+
+  <p>
+    <%= f.label :option_2 %><br>
+    <%= f.text_field :option_2 %>
+  </p>
+
+  <p>
+    <%= f.label :option_3 %><br>
+    <%= f.text_field :option_3 %>
+  </p>
+ <h2>Correct Options</h2><br>
+
+<%= fields_for :answers do |answer| %>
+<div class = "check-box hidden">
+  <%= answer.check_box :correct_option, {multiple: true}, 0, nil %>
+</div>
+<%= answer.label "option 1" %> 
+<%= answer.check_box :correct_option, {multiple: true}, 1, nil %> 
+<%= answer.label "option 2" %> 
+<%= answer.check_box :correct_option, {multiple: true}, 2, nil %> 
+<%= answer.label "option 3" %> 
+<%= answer.check_box :correct_option, {multiple: true}, 3, nil %> 
+<% end %>
+
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+  </div>
+
+  <div class="single-choice hidden">
+  	<%= form_for :question, url: admin_question_path do |f| %>
+ 
+ <p>
+ <%= f.label :question_number %><br>
+<%= f.text_field :question_number,  :readonly => true, :value => @test.question_details.count + 1 %>
+</p>
+
+ <p>
+ <%= f.label :question_type %><br>
+<%= f.text_field :question_type,  :readonly => true, :value => "single"%>
+</p>
+
+  <p>
+    <%= f.label :question %><br>
+    <%= f.text_area :question, size: "50x5" %>
+  </p>
+
+  <p>
+    <%= f.label :option_1 %><br>
+    <%= f.text_field :option_1 %>
+  </p>
+
+  <p>
+    <%= f.label :option_2 %><br>
+    <%= f.text_field :option_2 %>
+  </p>
+
+  <p>
+    <%= f.label :option_3 %><br>
+    <%= f.text_field :option_3 %>
+  </p>
+
+ <h2>Correct Options</h2><br>
+
+<%= fields_for :answers do |answer| %>
+  <div class = "check-box hidden">
+  <%= radio_button_tag :correct_option, '0', {} ,name: 'answers[correct_option][]' %> 
+  </div>
+<%= answer.label "option 1" %> 
+<%= radio_button_tag :correct_option, '1', false ,name: 'answers[correct_option][]' %> 
+<%= answer.label "option 2" %> 
+<%= radio_button_tag :correct_option, '2', false ,name: 'answers[correct_option][]' %> 
+<%= answer.label "option 3" %> 
+<%= radio_button_tag :correct_option, '3', false ,name: 'answers[correct_option][]' %> 
+<% end %>
+
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+  </div>
+  <div class="yes-no hidden">
+  	<%= form_for :question, url: admin_question_path do |f| %>
+ 
+ <p>
+ <%= f.label :question_number %><br>
+<%= f.text_field :question_number,  :readonly => true, :value => @test.question_details.count + 1 %>
+</p>
+
+<p>
+ <%= f.label :question_type %><br>
+<%= f.text_field :question_type,  :readonly => true, :value => "yes/no"%>
+</p>
+
+  <p>
+    <%= f.label :question %><br>
+    <%= f.text_area :question, size: "50x5" %>
+  </p>
+<p>
+    <%= f.label :option_1 %><br>
+    <%= f.text_field :option_1, :value => 'yes',  :readonly => true %>
+  </p>
+
+  <p>
+    <%= f.label :option_2 %><br>
+    <%= f.text_field :option_2, :value => 'no',  :readonly => true%>
+  </p>
+  
+ <h2>Correct Options</h2><br>
+ <%= fields_for :answers do |answer| %>
+ <div class = "check-box hidden">
+  <%= radio_button_tag :correct_option, '0', {} ,name: 'answers[correct_option][]' %> 
+  </div>
+<%= answer.label "option 1" %> 
+<%= radio_button_tag :correct_option, '1', false ,name: 'answers[correct_option][]' %> 
+<%= answer.label "option 2" %> 
+<%= radio_button_tag :correct_option, '2', false ,name: 'answers[correct_option][]' %> 
+
+<% end %>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+  </div>
+
+<script>
+  $('#question_Question_type').on('change',function(){
+     var option = $(this).val();
+    if(option == "Single Choice"){
+      $('.multiple-choice').hide()
+      $('.single-choice').show()
+      $('.yes-no').hide()
+    }
+    if(option == "Multiple Choice"){
+      $('.multiple-choice').show()
+      $('.single-choice').hide()
+      $('.yes-no').hide()
+    }
+    if(option == "yes/no"){
+      $('.multiple-choice').hide()
+      $('.single-choice').hide()
+      $('.yes-no').show()
+    }
+  })
+</script>

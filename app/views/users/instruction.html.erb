@@ -1,0 +1,44 @@
+
+<head>
+    <link href="style.css" rel="stylesheet" type="text/css" media="all">
+  </head>
+
+ <script src="../jquery.js"></script>
+  <script src="../jquery.simple.timer1.js"></script>
+ 	 <div class='container'>
+      <div class="timer1" data-seconds-left=1800></div>
+       <div class="timer2" data-seconds-left=3600></div>
+       <div class="timer3" data-seconds-left=10></div>
+      
+      <div>
+   
+<div id = 'question-form'>
+<h2>Please read the instructions carefully</h2>
+<div>
+<p>
+	1) Each question contain equal marks.
+</p>
+<p>
+	2) There is no negative marking for any question.
+</p>
+<p>
+	3) Once you submit the form you can't give that test again.
+</p>
+<p>
+	4)Once the test is started don't try to refresh the page otherwise test will automatically be submitted.
+</p>
+<p>
+	5) There are three types of question multiple, single, yes/no.
+</p>
+<center><h2> ALL THE BEST</h2></center>
+</div>
+<center>
+	<div>
+		<%= button_to "take test", give_test_path, method: :get , :remote => true %>
+ 		
+	
+	</div>
+</center>
+
+</div>
+

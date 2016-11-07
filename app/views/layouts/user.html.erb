@@ -1,0 +1,12 @@
+ <%= stylesheet_link_tag    'layoutchange', media: 'all', 'data-turbolinks-track' => true %>
+ <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+ <%= csrf_meta_tags %>
+<div class="common">
+<center><h1>ONLINE TEST </h1></center>
+ <div class = 'sign-out-div'>
+<%= link_to 'Sign out',  destroy_user_session_path, method: 'delete'%>
+</div>
+</div>
+
+ <%= yield %>
+

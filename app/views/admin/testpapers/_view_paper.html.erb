@@ -1,0 +1,39 @@
+<br>
+<div>
+<% for i in 0..(@test.number_of_questions - 1) %>
+	<% if i < question_detail.count %>
+ 		<%= question_detail[i].question_number %> . <%= question_detail[i].question %>
+ 		<p>Options:</p>
+  	<%= question_detail[i].option_1 %><br>
+ 		<%= question_detail[i].option_2 %><br>
+  	<%= question_detail[i].option_3 %><br><br>
+  	<% else %>
+  	<p><%= link_to 'Add question number:' , admin_questions_path(@test)  %><%= i + 1 %></p>
+
+  <%end%>
+  
+<%end%>
+<% if  @test.number_of_questions == question_detail.count %>
+<% if @test.status != 'active' %>
+  <%= link_to 'Active paper' ,  admin_active_paper_path, :remote => true   %>
+  <% else %>
+  <p>Paper already activated</p>
+  <%end%>
+  <%end%>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

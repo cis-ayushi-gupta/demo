@@ -1,0 +1,11 @@
+<center>
+	<div><h2>Exam completed</h2>
+		<p>Your marks are <%= $marks %> out of <%= $question_array.length %></p>
+	</div>
+</center>
+<div id = '#review'>
+	<%= form_tag(review_path(@test) , method: 'get') do %>
+  <%= submit_tag("Review") %>
+<%end%>
+</div>
+		

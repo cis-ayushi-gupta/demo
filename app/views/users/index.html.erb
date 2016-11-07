@@ -1,0 +1,65 @@
+<br>
+<center><h2> Select the test paper:</h2></center>
+<center>
+<div>
+<table cellpadding="15" style="float:left;" style="width:100%">
+<tr>
+	<th>Java</th>
+</tr>
+<% Test.where(status: 'active').each do |test| %>
+	<tr>
+		<%if test.course.name == "Java" %>	 
+  		<td>
+				<%= link_to test.name, instruction_path(test) %>
+			</td>
+ <%end %>
+	</tr>
+<% end %>
+</table>
+
+<table cellpadding="15" style="float:left;"  style="width:100%">
+<tr>
+	<th>Oracle</th>
+</tr>
+<% Test.where(status: 'active').each do |test| %>
+	<tr>
+		<%if test.course.name == "Oracle" %>	 
+  		<td>
+				<%= link_to test.name, instruction_path(test) %>
+			</td>
+ <%end %>
+	</tr>
+<% end %>
+</table>
+
+<table  cellpadding="15" style="float:left;"  style="width:100%">
+<tr>
+	<th>Ruby On Rails</th>
+</tr>
+<% Test.where(status: 'active').each do |test| %>
+	<tr>
+		<%if test.course.name == "Ruby On Rails" %>	 
+  		<td>
+				<%= link_to  test.name, instruction_path(test) %>
+			</td>
+ <%end %>
+	</tr>
+<% end %>
+</table>
+
+<table cellpadding="15" style="float:left;"  >
+<tr>
+	<th id>C++</th>
+</tr>
+<% Test.where(status: 'active').each do |test| %>
+	<tr>
+		<%if test.course.name == "C++" %>	 
+  		<td>
+				<%= link_to  test.name, instruction_path(test) %>
+			</td>
+ <%end %>
+	</tr>
+<% end %>
+</table>
+</div>
+</center>

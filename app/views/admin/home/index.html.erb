@@ -1,0 +1,65 @@
+<h3> Select the given option:</h3>
+
+<body>
+	<nav>
+		<ul>
+			<li>
+				<a href="">Add new paper</a>
+				<ul>
+  					 <% @courses.each do |course| %>
+  					 <%= link_to course.name, new_admin_course_testpaper_path(course), :remote => true  %><br>
+  					 <% end %>
+				</ul>
+			</li>
+			<li>
+				<a href="">Update paper</a>
+				<ul>
+					<% @courses.each do |course| %>
+					<li>
+  					<%= link_to course.name %><br>
+  					 	<ul>
+  					 	<% course.tests.each do |test| %>
+  					 	<%= link_to test.name,  admin_select_question_path(test)  %><br>
+  					 	<% end %>
+  					 	</ul>
+		 			</li>
+				 <% end %>
+				</ul>
+			</li>
+			<li>
+				<a href="">Delete paper</a>
+				<ul>
+					<% @courses.each do |course| %>
+					<li>
+  					<%= link_to course.name %><br>
+  					 	<ul>
+  					 	<% course.tests.each do |test| %>
+  					 	<%= link_to test.name, admin_testpaper_path(test), method: :delete, data: { confirm: 'Are you sure?' }  %><br>
+  					 	<% end %>
+  					 	</ul>
+		 			</li>
+				 <% end %>
+				</ul>
+			</li>
+			<li>
+				<a href="">View paper</a>
+				<ul>
+					<% @courses.each do |course| %>
+					<li>
+  					<%= link_to course.name %><br>
+  					 	<ul>
+  					 	<% course.tests.each do |test| %>
+  					 	<%= link_to test.name, admin_view_test_path(test), :remote => true  %><br>
+  					 	<% end %>
+  					 	</ul>
+		 			</li>
+				 <% end %>
+				</ul>
+			</li>
+		</ul>
+	</nav>
+	<div id = 'test-name'>
+	
+	</div>
+	
+

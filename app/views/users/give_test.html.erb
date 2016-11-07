@@ -1,0 +1,46 @@
+
+<% array_length = @question_array.length %>
+<%= form_for :question, url: save_data_in_session_path(@test, @question.id), method: :get  do |f| %>
+	<div id = '#question-form'>
+	</div>
+   <div class="previous hidden">
+	<%= f.submit 'Previous', :name => 'previous' %>
+	</div>
+	<div class="next hidden">
+	<%= f.submit 'Next', :name => 'next'%>
+	</div>
+	<div class="submit hidden">
+ 		<%= f.submit 'Submit', :name => 'submit'%>
+  	</div>
+	<% end %>
+
+  
+ 
+<script>
+  
+
+
+	$(document).ready(function(){
+
+	// $('#question_type').on('focus',function(){
+		 number = '<%= @question.question_number %>'
+		  arr_len = '<%= array_length %>'
+    console.log(number)
+		if(number == 1){
+			
+			$('.next').show()
+			$('.previous').hide()
+		}
+		else if(number == arr_len){
+			$('.next').hide()
+			$('.previous').show()
+			$('.submit').show()
+		}
+		else{
+			$('.next').show()
+			$('.previous').show()
+		}
+	})
+	
+</script>
+

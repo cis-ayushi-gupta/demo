@@ -1,0 +1,10 @@
+<% @error = params[:format] %>
+
+<p><%= @error %></p>
+<%= form_for :question_number, url: edit_admin_testpaper_path(params[:test_id] , @question_number), method: :get  do |f| %>
+ <p>
+    <%= f.label :Question_number%><br>
+   <%= f.text_field :question_number %>
+    <%= f.submit "Click" %>
+  </p>
+  <% end %>

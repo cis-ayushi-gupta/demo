@@ -1,0 +1,141 @@
+<%= form_for :question  do |f| %>
+
+<p>
+ <%= f.label :Question_type %><br>
+<%= f.text_field :Question_type,  :readonly => true, :value => @question_type, :id => 'question_type' %>
+</p>
+
+
+   <% end %>
+
+   <div class="multiple-choice hidden ">
+  <%= form_for @question, url: admin_path(@test, @question) , method: 'post' do |f| %>
+ 
+  <p>
+    <%= f.label :question %><br>
+    <%= f.text_area :question, size: "50x5" %>
+  </p>
+
+  <p>
+    <%= f.label :option_1 %><br>
+    <%= f.text_field :option_1 %>
+  </p>
+
+  <p>
+    <%= f.label :option_2 %><br>
+    <%= f.text_field :option_2 %>
+  </p>
+
+  <p>
+    <%= f.label :option_3 %><br>
+    <%= f.text_field :option_3 %>
+  </p>
+ <h2>Correct Options</h2><br>
+
+ <%= fields_for :answers do |answer| %>
+<%= answer.label "option 1" %> 
+<%= answer.check_box :correct_option, {multiple: true}, 1, nil %> 
+<%= answer.label "option 2" %> 
+<%= answer.check_box :correct_option, {multiple: true}, 2, nil %> 
+<%= answer.label "option 3" %> 
+<%= answer.check_box :correct_option, {multiple: true}, 3, nil %> 
+<% end %>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+  </div>
+
+  <div class="single-choice hidden">
+  	<%= form_for @question, url:  admin_path(@test, @question) , method: 'post' do |f| %>
+
+  <p>
+    <%= f.label :question %><br>
+    <%= f.text_area :question, size: "50x5" %>
+  </p>
+
+  <p>
+    <%= f.label :option_1 %><br>
+    <%= f.text_field :option_1 %>
+  </p>
+
+  <p>
+    <%= f.label :option_2 %><br>
+    <%= f.text_field :option_2 %>
+  </p>
+
+  <p>
+    <%= f.label :option_3 %><br>
+    <%= f.text_field :option_3%>
+  </p>
+
+ <h2>Correct Options</h2><br>
+
+<%= fields_for :answers do |answer| %>
+<%= answer.label "option 1" %> 
+<%= radio_button_tag :correct_option, '1',{},name: 'answers[correct_option][]' %> 
+<%= answer.label "option 2" %> 
+<%= radio_button_tag :correct_option, '2',{},name: 'answers[correct_option][]' %> 
+<%= answer.label "option 3" %> 
+<%= radio_button_tag :correct_option, '3',{},name: 'answers[correct_option][]' %> 
+<% end %>
+
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+  </div>
+
+  <div class="yes-no hidden">
+  	<%= form_for @question, url: admin_path(@test, @question) , method: 'post' do |f| %>
+ 
+  <p>
+    <%= f.label :question %><br>
+    <%= f.text_area :question, size: "50x5" %>
+  </p>
+ <p>
+    <%= f.label :option_1 %><br>
+    <%= f.text_field :option_1, :value => 'yes' ,  :readonly => true%>
+  </p>
+
+  <p>
+    <%= f.label :option_2 %><br>
+    <%= f.text_field :option_2, :value => 'no' ,  :readonly => true%>
+  </p>
+  
+ <h2>Correct Options</h2><br>
+  <%= fields_for :answers do |answer| %>
+<%= answer.label "option 1" %> 
+<%= radio_button_tag :correct_option, '1',{},name: 'answers[correct_option][]' %> 
+<%= answer.label "option 2" %> 
+<%= radio_button_tag :correct_option, '2',{},name: 'answers[correct_option][]' %> 
+
+<% end %>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+  </div>
+  <script>
+  $(document).ready(function(){
+
+	// $('#question_type').on('focus',function(){
+		 option = '<%=@question.question_type %>'
+     console.log(option)
+		if(option == "single"){
+			$('.multiple-choice').hide()
+			$('.single-choice').show()
+			$('.yes-no').hide()
+		}
+		if(option == "multiple"){
+			$('.multiple-choice').show()
+			$('.single-choice').hide()
+			$('.yes-no').hide()
+		}
+		if(option == "yes/no"){
+			$('.multiple-choice').hide()
+			$('.single-choice').hide()
+			$('.yes-no').show()
+		}
+	})
+</script>

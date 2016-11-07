@@ -1,0 +1,48 @@
+<br><h3> Select the test paper:</h3>
+<table border = "1">
+<tr>
+	<th>Java</th>
+	<th>Ruby on rails</th>
+	<th>Oracle</th>
+	<th>C++</th>
+</tr>
+<% Test.where(status: 'active').each do |test| %>
+	<tr>
+		<%if test.course.name == "C++" %>
+	  	<td></td>
+	 		<td></td>
+	  	<td></td>
+		 	<td>
+				<%= test.name %>
+			</td>
+ 		<%end %>
+ 	<%if test.course.name == "Ruby On Rails" %>
+ 		<td></td>
+	 	<td>
+			<%= test.name %>
+		</td>
+  	<td></td>
+ 		<td></td>
+ <%end %>
+
+   <%if test.course.name == "Oracle" %>
+     <td></td>
+ 			<td></td>
+ 			<td>
+				<%= test.name %>
+			</td>
+	  	<td></td>
+ 		<%end %>
+
+
+	<%if test.course.name == "Java" %>	 
+  	<td>
+			<%= test.name %>
+		</td>
+		<td></td>
+ 		<td></td>
+		<td></td>
+ 	<%end %>
+	</tr>
+<% end %>
+</table>

@@ -1,0 +1,103 @@
+<%= @test.time_for_test %>
+<% array_length = $question_array.length %>
+<%= form_for :question, url: save_data_in_session_path(@test, @question.id), method: :get, :remote => true  do |f| %>
+	<p>
+   	<%= @question.question_number  %> . <%= @question.question %>
+	</p>
+	<h2>Your Answer</h2><br>
+	<% if $user_answer.blank? %>
+ 	<%= fields_for :answers do |answer| %>
+		<div class = "check-box hidden">
+			<%= radio_button_tag :user_answer, '0', {} ,name: 'answers[user_answer][]' %> 
+		</div>
+		<%= radio_button_tag :user_answer, '1', false ,name: 'answers[user_answer][]' %> 
+		<%= answer.label @question.option_1 %><br> 
+		<%= radio_button_tag :user_answer, '2', false ,name: 'answers[user_answer][]' %> <%= answer.label @question.option_2 %><br>  
+		<%= radio_button_tag :user_answer, '3', false ,name: 'answers[user_answer][]' %> <%= answer.label @question.option_3 %> 
+<% end %>
+	<% else %>
+		<%= fields_for :answers do |answer| %>
+			<div class = "check-box hidden">
+				<%= radio_button_tag :user_answer, '0', {} ,name: 'answers[user_answer][]' %> 
+			</div>
+			<%= radio_button_tag :user_answer, '1', is_first_checked($user_answer , '1') ,name: 'answers[user_answer][]' %> 
+			<%= answer.label @question.option_1 %><br> 
+			<%= radio_button_tag :user_answer, '2', is_first_checked($user_answer, '2') ,name: 'answers[user_answer][]' %> 
+			<%= answer.label @question.option_2 %><br>  
+			<%= radio_button_tag :user_answer, '3', is_first_checked($user_answer, '3') ,name: 'answers[user_answer][]' %> 
+			<%= answer.label @question.option_3 %> 
+	<% end %>
+<% end %>
+	<div class="previous hidden">
+		<%= f.submit 'Previous', :name => 'previous' %>
+	</div>
+	<div class="next hidden">
+		<%= f.submit 'Next', :name => 'next'%>
+	</div>
+	<div class="submit hidden">
+ 		<%= f.submit 'Submit', :name => 'submit', :id => 'submit'%>
+  </div>
+<% end %>
+
+  
+ 
+<script>
+ 
+		number = '<%= @question.question_number %>'
+		arr_len = '<%= array_length %>'
+    console.log(number)
+		if(number == 1)
+		{
+			$('.next').show()
+			$('.previous').hide()
+		}
+		else if(number == arr_len)
+		{
+			$('.next').hide()
+			$('.previous').show()
+			$('.submit').show()
+		}
+		else
+		{
+			$('.next').show()
+			$('.previous').show()
+		}
+		timer = '<%= $timer_value %>'
+		if(timer == 1)
+		{
+			myTimer();
+		}
+		function myTimer(){
+ 			$(function()
+ 			{
+ 				time_value = '<%= @test.time_for_test %>'
+ 				console.log(time_value)
+ 				if(time_value == 1800)
+ 				{
+    			$('.timer1').startTimer();
+				}
+				else if(time_value == 3600)
+				{
+    			$('.timer2').startTimer();
+				}
+				else
+    		{
+    	 	$('.timer3').startTimer();
+    	  countdown();
+    	}
+ 			});
+
+
+
+}
+	
+	setInterval(function()
+ 	{
+ 		document.getElementById('submit').click(); 
+ 	}, 
+ 	10000);
+ 
+	
+
+
+</script>

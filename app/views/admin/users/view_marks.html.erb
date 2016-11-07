@@ -1,0 +1,8 @@
+<% for i in 0..(@marks.length - 1) %>
+<% @test_id = @marks[i][:test_id]  %>
+<% @test = Test.find(@test_id)   %>
+<strong><%= @test.name %> :</strong>
+<%= @marks[i][:score] %> / <%= @test.number_of_questions %><br>
+
+<% end %>
+

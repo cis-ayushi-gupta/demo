@@ -1,0 +1,51 @@
+<center>
+	<div><h2>Exam completed</h2>
+		<p>Your marks are <%= $marks %> out of <%= $question_array.length %></p>
+	</div>
+</center>
+<hr>
+<% for i in 0..(@question_detail.length-1) %>
+
+<br>
+	<%= i+1 %> . <%= @question_detail[i][:question] %><br><br>
+	<strong> Options: </strong><br>
+	<%= @question_detail[i][:option_1] %><br>
+	<%= @question_detail[i][:option_2] %><br>
+	<%= @question_detail[i][:option_3] %><br><br>
+	<% @id = @question_detail[i][:id] %>
+	<% @correct_answer = Answer.find_by_question_detail_id(@id) %>
+	<% @user_answer = UserAnswer.find_by_question_detail_id(@id) %>
+	<strong> Correct answer: </strong>
+	<% @length =  @correct_answer.correct_option.length %>
+		<% for j in 0..(@length - 1) %>
+			<% if j == 0 %>
+				<%= @correct_answer.correct_option[j] %>
+			<% else%>
+				, <%= @correct_answer.correct_option[j] %>
+			<% end %>
+		<% end %>
+ 	
+ 	<strong>Your answer: </strong>
+	<% @length =  @user_answer.user_answer.length %>
+	<% if @length > 1 %>
+	<% for j in 0..(@length - 1) %>
+		<% if j == 0 %>
+
+		<% else%>
+			, <%= @user_answer.user_answer[j] %>
+		<% end %>
+		
+	<% end %>
+	<% else %>
+		<% for j in 0..(@length - 1) %>
+			<% if j == 0 %>
+				<%= @user_answer.user_answer[j] %>
+			<% else%>
+				, <%= @user_answer.user_answer[j] %>
+			<% end %>
+		<% end %>
+		
+ 	<hr>
+ 	<% end %>
+ 	<hr
+<% end %>

@@ -1,0 +1,43 @@
+<p>
+ 	<strong>Name:</strong>
+ 	<%= @user.user_name %>
+</p>
+
+<p>
+ 	<strong>Gender:</strong>
+ 	<%= @user.sex%>
+</p>
+
+<p>
+ 	<strong>College:</strong>
+ 	<%= @user.college %>
+</p>
+
+<p>
+ 	<strong>Address:</strong>
+ 	<%= @user.address %>
+</p>
+
+<p>
+ 	<strong>City:</strong>
+ 	<%= @user.city %>
+</p>
+
+<p>
+ 	<strong>Pincode:</strong>
+ 	<%= @user.pincode %>
+</p>
+
+<p>
+ 	<strong>Country:</strong>
+ 	<%= @user.country %>
+</p>
+
+<p>
+ 	<strong>Email:</strong>
+ 	<%= @user.email %>
+</p>
+
+<p>
+ 	<%= link_to 'marks obtain', admin_view_marks_path(@user) %>
+</p>
